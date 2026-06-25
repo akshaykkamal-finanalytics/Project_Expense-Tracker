@@ -1,0 +1,19 @@
+{
+    "transactions": [
+        {
+            "type": "income",
+            "category": "salary",
+            "amount": 350000.0,
+            "date": "2026-04-30",
+            "note": "Salary for April"
+        },
+        {
+            "type": "expense",
+            "category": "rent",
+            "amount": 40000.0,
+            "date": "2026-05-01",
+            "note": "expense"
+        }
+    ],
+    "budgets": {}
+}
