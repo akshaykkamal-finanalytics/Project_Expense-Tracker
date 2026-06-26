@@ -1,4 +1,4 @@
-# 💰 Smart Personal Expense Tracker A menu-driven console application to track personal income and expenses, built in Python as a self-study project for data analytics skill development.
+#Smart Personal Expense Tracker A menu-driven console application to track personal income and expenses, built in Python as a self-study project for data analytics skill development.
 ## Features:-
 1. Add income/expense transactions with full input validation
 2. View all transactions in a clean, aligned console table
@@ -19,4 +19,4 @@
 7. | Check budget status | 
 8. | Save & Exit | 
 ## Python concepts demonstrated - Data structures: list of dicts, nested dicts, tuple unpacking - Input validation: whitelist checks, try/except, optional-with-default - List comprehensions and generator expressions - Dictionary accumulation pattern - Sorting with lambda key functions - f-string column alignment and number formatting - File I/O with JSON, context managers, corruption recovery - Event loop pattern (while True + dispatcher + break)
-## Project context - Built as Top Mentor DA/DS project, targeting a transition into Finance Data Analyst / FP&A roles. ## Author Akshay Kumar — Senior Accountant transitioning into Finance Data Analytics 📍 Agra, India
+## Project context - Built as Top Mentor DA/DS project, targeting a transition into Finance Data Analyst / FP&A roles. ## Author Akshay Kumar — Senior Accountant transitioning into Finance Data Analytics.
