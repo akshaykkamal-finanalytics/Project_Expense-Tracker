@@ -95,7 +95,7 @@ def add_transaction(transactions):
     #Note
     note = input("Note (optional): ").strip()
 
-    #The Transaction Dictionary
+    #Transaction Dictionary
 
     transaction = {
         "type": t_type,
@@ -105,7 +105,7 @@ def add_transaction(transactions):
         "note": note
     }
 
-    #Append added transaction to the list
+    #Appending added transaction to the list
     transactions.append(transaction)
     print(f" Transaction added! Total records: {len(transactions)}")
 
@@ -131,10 +131,7 @@ def view_transactions(transactions):
             f"₹{txn['amount']:>12,.2f}  "
             f"{txn['note']:<10}"
         )
-"""
-add_transaction(transactions)
-view_transactions(transactions)
-"""
+
 def filter_transactions(transactions, filters):
     """
     filters is a dict with any of these optional keys:
@@ -145,21 +142,21 @@ def filter_transactions(transactions, filters):
     """
     result = transactions       #starts with everything
 
-    #Filter 1: by type
+    # by type
     if "type" in filters:
         result = [
             txn for txn in result
             if txn ["type"] == filters["type"]
         ]
 
-    #Filter 2: by category
+    # by category
     if "category" in filters:
         result = [
             txn for txn in result
             if txn["category"] == filters["category"]
         ]
 
-    # filter 3: By date range
+    # By date range
     if "start_date" in filters or "end_date" in filters:
         start = datetime.strptime(
             filters.get("start_date", "2000-01-01"), '%Y-%m-%d')
@@ -204,12 +201,6 @@ def search_menu(transactions):
         filters["end_date"] = ed
 
     filter_transactions(transactions, filters)
-"""
-add_transaction(transactions)
-add_transaction(transactions)
-add_transaction(transactions)
-filter_transactions(transactions, {"category": "shopping"})
-"""
 
 def calculate_summary(transactions):
     print("\n--- Summary Report ---")
@@ -218,7 +209,7 @@ def calculate_summary(transactions):
         print(" No transactions to summarise.")
         return
 
-    #Step 1: Separate income and expense totals
+    #Separate income and expense totals
     total_income = sum(
         txn["amount"] for txn in transactions
         if txn["type"] == "income"
@@ -228,16 +219,16 @@ def calculate_summary(transactions):
         if txn["type"] == "expense"
     )
 
-    #Step 2: Net Savings
+    #Net Savings
     net_savings = total_income - total_expense
 
-    #Step 3: Print the P&L
+    #Print the P&L
     print(f" Total Income:  ₹{total_income:>12,.2f}")
     print(f" Total Expense : ₹{total_expense:>12,.2f}")
     print(f" {'-' * 28}")
     print(f" Net Savings: ₹{net_savings:>12,.2f}")
 
-    #Step 4: Colour-code savings
+    #Colour-code savings
     if net_savings < 0:
         print(f" ⚠ Warning: You are ₹{abs(net_savings):,.2f} over your income!")
     elif net_savings == 0:
@@ -250,15 +241,11 @@ def calculate_summary(transactions):
 def category_report(transactions):
     print("\n--- Category Report ---")
 
-
-
-
-
     if not transactions:
         print(" No transactions to report.")
         return
 
-    #Step 1: Accumulate spend per category
+    #Accumulate spend per category
     category_totals = {}
     for txn in transactions:
         if txn["type"] == "expense":
@@ -270,25 +257,25 @@ def category_report(transactions):
     if not category_totals:
         print(" No expense transactions found.")
 
-    #step 2: Sort by highest spend
+    #Sort by highest spend
     sorted_cats = sorted(
         category_totals.items(),
         key=lambda x: x[1],
         reverse=True,
     )
 
-    #Step 3: Print ranked breakdown
+    #Print ranked breakdown
     print(f" {'Category':<12} {'Spent':>12}")
     print(f" {'-' * 26}")
     for rank, (cat, total) in enumerate(sorted_cats, start=1):
         print(f" {rank}. {cat:10} ₹{total:>10,.2f}")
 
-    #Step 4: Highest Expense category
+    #Highest Expense category
     top_cat, top_amt = sorted_cats[0]
     print(f"\n ▶Highest Spend Category: {top_cat.title()} at ₹{top_amt:,.2f}")
 
 
-    #Step 5: Monthly breakdown
+    #Monthly breakdown
     print("\n  --- Monthly Summary ---")
     monthly_total = {}
     for txn in transactions:
@@ -311,7 +298,7 @@ def set_budget(budgets):
     print("Enter 'done' when finished.\n")
 
     while True:
-        #Step 1: Ask for category
+        #Ask for category
         cat = input("Category (or 'done'): ").strip().lower()
         if cat == "done":
             break
@@ -319,7 +306,7 @@ def set_budget(budgets):
             print(f" Invalid category.")
             continue
 
-        #Step 2: Ask for budget amount
+        #Ask for budget amount
         try:
             limit = float(input(f"Monthly budget for '{cat}' (₹): "))
             if limit <= 0:
@@ -329,7 +316,7 @@ def set_budget(budgets):
             print(" Enter a valid number.")
             continue
 
-        # Step 3: Store in budgets dict
+        #Store in budgets dict
         budgets[cat] = limit
         print(f" Budget set: {cat} → ₹{limit:,.2f} ")
 
@@ -339,13 +326,12 @@ def set_budget(budgets):
 def check_budget(transactions, budgets):
     print("\n--- Budget Status ---")
 
-    #Guard: no budgets set yet
+    #no budgets set yet
     if not budgets:
         print(" No budgets set. Use option 5 to set budgets.")
         return
 
-    #Step 1: Compute actual spend per category
-    # (same accumulation pattern as Stage 4)
+    #Compute actual spend per category
     actual = {}
     for txn in transactions:
         if txn["type"] == "expense":
@@ -354,11 +340,11 @@ def check_budget(transactions, budgets):
                 actual[cat] = 0
             actual[cat] += txn["amount"]
 
-    #Step 2: Print header
+    #Print header
     print(f" {'Category':<12} {'Budget':>10} {'Spent':>12} {'Remaining':>12} Status")
     print(f" {'-' * 58}")
 
-    #Step 3: Compare budget vs actual, row by row
+    #Compare budget vs actual, row by row
     alerts = []
     for cat, limit in budgets.items():
         spent = actual.get(cat, 0)
@@ -382,7 +368,7 @@ def check_budget(transactions, budgets):
             f"{status}"
         )
 
-    #Step 4: Print consolidated alerts at the bottom
+    #Print consolidated alerts at the bottom
     if alerts:
         print(f"\n {'─' * 40}")
         print(" ⚠  BUDGET ALERTS")
@@ -410,7 +396,7 @@ def show_menu():
         print(options)
 
 def main():
-    #Startup: Load persisted data
+    #Startup: Loading persisted data
     global transactions, budgets
     transactions, budgets = load_data()
 
@@ -418,7 +404,7 @@ def main():
     while True:
         show_menu()
 
-    #Get User choice
+    #User choice
         choice = input(" Choose an option (1 to 8): ").strip()
         if choice == "1": add_transaction(transactions)
         elif choice == "2": view_transactions(transactions)

@@ -10,14 +10,13 @@
 8. JSON persistence — data survives app restarts
 ## How to run ```bash # No external libraries needed — pure Python 3 python Exp_Tracker.py ``` 
 ## Menu options | Option | Function |
-# |--------|----------| 
-# 1 | Add a transaction | 
-# 2 | View all transactions | 
-# 3 | Filter / Search | 
-# 4 | Summary report | 
-# 5 | Category report | 
-# 6 | Set category budget | 
-# 7 | Check budget status | 
-# 8 | Save & Exit | 
+1. | Add a transaction | 
+2. | View all transactions | 
+3. | Filter / Search | 
+4. | Summary report | 
+5. | Category report | 
+6. | Set category budget | 
+7. | Check budget status | 
+8. | Save & Exit | 
 ## Python concepts demonstrated - Data structures: list of dicts, nested dicts, tuple unpacking - Input validation: whitelist checks, try/except, optional-with-default - List comprehensions and generator expressions - Dictionary accumulation pattern - Sorting with lambda key functions - f-string column alignment and number formatting - File I/O with JSON, context managers, corruption recovery - Event loop pattern (while True + dispatcher + break)
 ## Project context - Built as Top Mentor DA/DS project, targeting a transition into Finance Data Analyst / FP&A roles. ## Author Akshay Kumar — Senior Accountant transitioning into Finance Data Analytics 📍 Agra, India
